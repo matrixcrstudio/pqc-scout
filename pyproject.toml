@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pqc-scout"
+version = "0.1.0"
+description = "Post-quantum cryptography migration scanner: crypto inventory, Q-Day exposure scoring, NIST-aligned migration roadmap"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Matrix CR Studio", email = "pablo@matrixcr.ai" }]
+keywords = [
+  "post-quantum", "cryptography", "pqc", "ml-kem", "ml-dsa",
+  "quantum-safe", "migration", "crypto-inventory", "nis2", "dora",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: System Administrators",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Security :: Cryptography",
+]
+dependencies = [
+  "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+llm = ["anthropic>=0.40"]
+dev = ["pytest>=7.0"]
+
+[project.urls]
+Homepage = "https://github.com/matrixcrstudio/pqc-scout"
+Issues = "https://github.com/matrixcrstudio/pqc-scout/issues"
+
+[project.scripts]
+pqc-scout = "pqc_scout.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
