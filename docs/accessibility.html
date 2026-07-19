@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accessibility statement — PQC-Scout</title>
+  <meta name="description" content="PQC-Scout's documentation conforms to WCAG 2.1 Level AA. This statement records the conformance target and known limitations.">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/theme.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site">
+    <div class="bar">
+      <a class="brand" href="index.html">PQC-Scout</a>
+      <nav class="primary" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="getting-started.html">Getting started</a></li>
+          <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="accessibility.html" aria-current="page">Accessibility</a></li>
+          <li><a href="https://github.com/matrixcrstudio/pqc-scout">GitHub</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" aria-pressed="false">Dark theme</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <h1>Accessibility statement</h1>
+    <p class="lead">This documentation is designed to conform to
+      <strong>WCAG 2.1 Level AA</strong>.</p>
+
+    <h2>Conformance target</h2>
+    <p>Web Content Accessibility Guidelines (WCAG) 2.1, Level AA. The site is
+      built as static HTML and remains fully readable and navigable with
+      JavaScript, custom styling, or images disabled.</p>
+
+    <h2>Measures taken</h2>
+    <ul>
+      <li><strong>Semantic structure</strong> — landmark regions
+        (<code>header</code>, <code>nav</code>, <code>main</code>,
+        <code>footer</code>), a single <code>h1</code> per page, and a logical
+        heading order (WCAG 1.3.1, 2.4.6).</li>
+      <li><strong>Skip link</strong> — a keyboard-reachable "skip to main
+        content" link precedes the navigation (2.4.1).</li>
+      <li><strong>Contrast</strong> — every text and background pair meets or
+        exceeds the 4.5:1 ratio for normal text (3:1 for large text and UI
+        components), verified in both light and dark themes (1.4.3, 1.4.11).</li>
+      <li><strong>Visible focus</strong> — a high-contrast focus indicator is
+        shown for every interactive element on keyboard focus (2.4.7).</li>
+      <li><strong>Keyboard operable</strong> — all functionality, including the
+        theme toggle, is reachable and operable by keyboard alone (2.1.1).</li>
+      <li><strong>Responsive and reflowable</strong> — content reflows to a
+        single column without horizontal scrolling down to 320&nbsp;CSS pixels;
+        wide code and tables scroll within their own container (1.4.10).</li>
+      <li><strong>Respects user preferences</strong> — honors
+        <code>prefers-color-scheme</code> and
+        <code>prefers-reduced-motion</code>; the theme toggle's state is
+        conveyed with <code>aria-pressed</code> (1.4.12, 2.3.3).</li>
+      <li><strong>Language and labels</strong> — the page language is declared,
+        tables carry captions and column headers, and navigation exposes the
+        current page with <code>aria-current</code>.</li>
+    </ul>
+
+    <h2>Known limitations</h2>
+    <p>Conformance is self-assessed and evaluated on an ongoing basis; it has
+      not yet been audited by an independent third party. If you encounter a
+      barrier, please open an issue on the
+      <a href="https://github.com/matrixcrstudio/pqc-scout/issues">project
+      tracker</a> so it can be addressed.</p>
+
+    <h2>Feedback</h2>
+    <p>Accessibility feedback is welcome and treated as a defect, not an
+      enhancement. File it on the issue tracker linked above.</p>
+  </main>
+
+  <footer class="site">
+    <div class="bar">
+      <p>PQC-Scout is maintained by Matrix CR Studio and released under the
+        <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>

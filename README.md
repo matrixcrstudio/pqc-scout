@@ -15,6 +15,13 @@ Given a target — a set of domains, a stack description, or a requirements file
 3. **Emits a prioritized, phased migration roadmap** citing NIST FIPS 203 (ML-KEM), FIPS 204 (ML-DSA), FIPS 205 (SLH-DSA), and CISA CNSA 2.0 milestones.
 4. **Applies sector-aware retention priors** — financial (15y), healthcare (30y), national-security (25y), and genomic/germline data, whose effectively unbounded confidentiality horizon makes every classical asymmetric surface `CRITICAL` by construction.
 
+## Documentation
+
+Full documentation lives in [`docs/`](./docs/) — a static, WCAG 2.1 AA
+documentation site (home, getting started, how it works, accessibility
+statement). Serve it locally with `python -m http.server -d docs`, or publish
+it via GitHub Pages (Settings → Pages → deploy from `main` / `docs`).
+
 ## Install
 
 ```bash

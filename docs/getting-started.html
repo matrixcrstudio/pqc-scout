@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting started — PQC-Scout</title>
+  <meta name="description" content="Install PQC-Scout and run your first post-quantum exposure assessment.">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/theme.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site">
+    <div class="bar">
+      <a class="brand" href="index.html">PQC-Scout</a>
+      <nav class="primary" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="getting-started.html" aria-current="page">Getting started</a></li>
+          <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="https://github.com/matrixcrstudio/pqc-scout">GitHub</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" aria-pressed="false">Dark theme</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <h1>Getting started</h1>
+    <p class="lead">Install the package, run an assessment, read the roadmap.
+      No API keys or accounts required for the default path.</p>
+
+    <h2>Requirements</h2>
+    <p>Python 3.10 or newer. The core install depends only on
+      <code>pydantic</code>.</p>
+
+    <h2>Install</h2>
+<pre><code># from a clone of the repository
+pip install .
+
+# optional: LLM-assisted extraction
+pip install .[llm]</code></pre>
+
+    <h2>Assess a stack</h2>
+    <p>Describe your stack in plain text (or point at a file). Deterministic
+      extraction is the default — it reports only what it can literally
+      identify, and says so.</p>
+<pre><code>pqc-scout assess --target "ExampleCo" \
+  --stack "nginx TLS 1.3, RSA-2048 code signing, AES-128 backups"
+
+# from a file, with a sector retention prior
+pqc-scout assess -t "GenomicsLab" -s ./stack.txt --sector genomic</code></pre>
+
+    <h2>Scan live TLS endpoints</h2>
+    <p>The TLS scanner performs a standard handshake against hosts you name.
+      It is passive: no enumeration, no downgrade probing. Scan only
+      infrastructure you operate or are authorized to assess.</p>
+<pre><code>pqc-scout scan example.org example.com</code></pre>
+
+    <h2>Read saved reports</h2>
+<pre><code>pqc-scout list
+pqc-scout score   -r &lt;report-id&gt;
+pqc-scout roadmap -r &lt;report-id&gt;
+pqc-scout status</code></pre>
+
+    <h2>Command reference</h2>
+    <table>
+      <caption>PQC-Scout commands</caption>
+      <thead>
+        <tr><th scope="col">Command</th><th scope="col">Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>assess</code></td><td>Full assessment from a stack description</td></tr>
+        <tr><td><code>scan</code></td><td>Live passive TLS scan of one or more domains</td></tr>
+        <tr><td><code>score</code></td><td>Per-surface scoring for a saved report</td></tr>
+        <tr><td><code>roadmap</code></td><td>Phased migration roadmap for a saved report</td></tr>
+        <tr><td><code>list</code></td><td>Recent assessments</td></tr>
+        <tr><td><code>status</code></td><td>Database statistics and standards references</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p>LLM-assisted extraction (<code>--llm</code>) requires the
+      <code>llm</code> extra and an <code>ANTHROPIC_API_KEY</code>. It
+      <em>fails loud</em>: a truncated or invalid model response aborts the
+      assessment rather than silently falling back to the deterministic
+      baseline. You always know which extractor produced a report.</p>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="bar">
+      <p>PQC-Scout is maintained by Matrix CR Studio and released under the
+        <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>

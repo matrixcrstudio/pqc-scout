@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How it works — PQC-Scout</title>
+  <meta name="description" content="The Q-Day horizon model, harvest-now-decrypt-later tiering, and sector retention priors behind PQC-Scout's exposure scoring.">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/theme.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site">
+    <div class="bar">
+      <a class="brand" href="index.html">PQC-Scout</a>
+      <nav class="primary" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="getting-started.html">Getting started</a></li>
+          <li><a href="how-it-works.html" aria-current="page">How it works</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="https://github.com/matrixcrstudio/pqc-scout">GitHub</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" aria-pressed="false">Dark theme</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <h1>How it works</h1>
+    <p class="lead">Every surface is scored on one question: given how long its
+      data must stay confidential, is it already inside the window where a
+      future quantum computer can decrypt what an adversary records today?</p>
+
+    <h2>The Q-Day horizon model</h2>
+    <p>Each algorithm family carries a nominal horizon — the years until a
+      cryptographically relevant quantum computer credibly breaks it. The bands
+      are grounded in published cryptanalysis, not guesswork:</p>
+    <ul>
+      <li>NIST IR 8547 migration guidance and Mosca's theorem.</li>
+      <li>NSA/CISA CNSA 2.0 milestone timeline.</li>
+      <li>Gidney &amp; Ekerå (2019) and Gidney (2025): the falling resource
+        cost of factoring RSA-2048.</li>
+      <li>Cain, Bluvstein, Preskill et al. (2026): elliptic-curve discrete-log
+        on P-256 in days on neutral-atom hardware — which is why 256-bit EC
+        breaks <em>first</em>, ahead of RSA and finite-field Diffie-Hellman.</li>
+    </ul>
+
+    <h2>Harvest-now, decrypt-later tiering</h2>
+    <p>An adversary recording ciphertext today only needs the
+      <em>earliest-credible</em> break to arrive within the data's
+      confidentiality window. PQC-Scout therefore tiers against a compressed
+      horizon for asymmetric (Shor-class) primitives, following the Regev
+      (2023) and Ragavan–Vaikuntanathan (CRYPTO 2024) line.</p>
+    <div class="callout">
+      <p><strong>Grover is not Shor.</strong> The compression applies to
+      asymmetric primitives only. Symmetric and hash primitives (AES, SHA,
+      ChaCha) keep their nominal horizon — conflating the two would overstate
+      the risk. This distinction is deliberate and load-bearing.</p>
+    </div>
+
+    <h2>Exposure tiers</h2>
+    <table>
+      <caption>How a surface is classified</caption>
+      <thead>
+        <tr><th scope="col">Tier</th><th scope="col">Condition</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="badge crit">CRITICAL</span></td>
+          <td>Earliest-credible horizon &le; data retention: harvest-now-decrypt-later is live.</td></tr>
+        <tr><td>HIGH</td>
+          <td>Nominal horizon &le; retention plus a 3-year migration buffer.</td></tr>
+        <tr><td>MONITOR</td>
+          <td>Adequate margin remains for a planned migration.</td></tr>
+        <tr><td><span class="badge safe">SAFE</span></td>
+          <td>Already a NIST-standardized post-quantum scheme (ML-KEM, ML-DSA, SLH-DSA).</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Sector retention priors</h2>
+    <p>The tier turns on one number: how many years the data must stay
+      confidential. A flat default mis-tiers the extremes, so a sector hint
+      floors the horizon — and a floor can only <em>raise</em> severity, never
+      lower it. The safe direction for a security tool.</p>
+    <p>The sharpest case is permanent human data. A genome never changes and
+      implicates non-consenting relatives indefinitely; a biometric cannot be
+      reissued. PQC-Scout models such data as an effectively unbounded horizon.
+      Under that prior, <em>every</em> classical asymmetric surface protecting
+      it is <span class="badge crit">CRITICAL</span> by construction — the
+      honest consequence of the harvest-now-decrypt-later doctrine, not a
+      tuning artifact.</p>
+
+    <h2>Migration targets</h2>
+    <p>Recommendations map each vulnerable primitive to its NIST-standardized
+      replacement: ML-KEM-768 (FIPS 203) for key exchange, ML-DSA-65 (FIPS 204)
+      for signatures, SLH-DSA (FIPS 205) for firmware signing, with hybrid
+      X25519 + ML-KEM-768 recommended for the transition period.</p>
+  </main>
+
+  <footer class="site">
+    <div class="bar">
+      <p>PQC-Scout is maintained by Matrix CR Studio and released under the
+        <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>
